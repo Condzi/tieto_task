@@ -12,7 +12,8 @@ project(${PROJECT_NAME})
 set(INC_DIR code)
 set(SRC_DIR code)
 file(GLOB_RECURSE SRC_LIST
-     ${SRC_DIR}/*.c)
+     "${SRC_DIR}/*.c"
+	 "${INC_DIR}/*.h")
 
 # Target setup
 add_executable(${TARGET_NAME} ${SRC_LIST})
