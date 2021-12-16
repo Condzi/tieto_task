@@ -34,7 +34,7 @@ cstring_delete(CString* cstring);
  * 
  * @param[in] cstring - CString object created using cstring_new.
  *
- * @return: length of the string without NULL-terminator.
+ * @return: length of the string without NULL-terminator. 0 if cstring is NULL.
  */
 size_t
 cstring_length(CString* cstring);
@@ -45,7 +45,7 @@ cstring_length(CString* cstring);
  * @param[in] cstring - CString object created using cstring_new.
  * @param[in] idx - index of the character.
  *
- * @return: copy of the character at position 'idx'.
+ * @return: copy of the character at position 'idx'. 0 if cstring is NULL or idx is out of bounds.
  */
 char
 cstring_at(CString* cstring, size_t idx);
@@ -66,7 +66,7 @@ cstring_replace(CString* cstring, size_t idx, char new_char);
  * 
  * @param[in] cstring - CString object created using cstring_new.
  *
- * @return: pointer to a NULL-terminated string held by the CString.
+ * @return: pointer to a NULL-terminated string held by the CString. NULL if cstring is NULL.
  */
 const char*
 cstring_get_string(CString* cstring);

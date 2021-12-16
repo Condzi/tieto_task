@@ -33,28 +33,50 @@ cstring_delete(CString* cstring) {
 
 size_t
 cstring_length(CString* cstring) {
+	if (!cstring) {
+		perror("cstring is NULL");
+		return 0;
+	}
+
 	return cstring->length;
 }
 
 char
 cstring_at(CString* cstring, size_t idx) {
-	assert(cstring);
-	assert(cstring->length >= idx);
+	if (!cstring) {
+		perror("cstring is NULL");
+		return 0;
+	}
+
+	if (idx > cstring_length) {
+		perror("idx out of bounds");
+		return 0;
+	}
 
 	return cstring->buffer[idx];
 }
 
 void
 cstring_replace(CString* cstring, size_t idx, char new_char) {
-	assert(cstring);
-	assert(cstring->length >= idx);
+	if (!cstring) {
+		perror("cstring is NULL");
+		return 0;
+	}
+
+	if (idx > cstring_length) {
+		perror("idx out of bounds");
+		return 0;
+	}
 
 	cstring->buffer[idx] = new_char;
 }
 
 const char*
 cstring_get_string(CString* cstring) {
-	assert(cstring);
+	if (!cstring) {
+		perror("cstring is NULL");
+		return NULL;
+	}
 
 	return cstring->buffer;
 }
