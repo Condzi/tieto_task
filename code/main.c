@@ -6,7 +6,7 @@
 #include "cstring.h"
 
 int main() {
-	char const* source = "Hello, sailor!";
+	const char* source = "Hello, sailor!";
 	CString* cstring = cstring_new(source);
 
 	assert(cstring_length(cstring) == 14);

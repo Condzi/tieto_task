@@ -6,47 +6,53 @@
 
 
 CString* 
-cstring_new(char const* string) {
+cstring_new(const char* string) {
 	CString* result = malloc(sizeof(CString));
-	assert(result);
-
-	if (string) {
-		result->length = (int64_t)strlen(string);
-		result->buffer = malloc(sizeof(*string)*result->length + 1);
-		memcpy(result->buffer, string, result->length + 1);
-	} else {
-		result->buffer = NULL;
-		result->length = 0;
+	if (!result) {
+		perror("malloc() failed in cstring_new");
+		return NULL;
 	}
+
+	result->length = strlen(string);
+	result->buffer = malloc(sizeof(*string)*result->length + 1);
+	if (!result->buffer) {
+		perror("malloc() failed in cstring_new");
+		return NULL;
+	}
+
+	memcpy(result->buffer, string, result->length + 1);
 
 	return result;
 }
 
-int64_t
+void
+cstring_delete(CString* cstring) {
+	free(cstring->buffer);
+	free(cstring);
+}
+
+size_t
 cstring_length(CString* cstring) {
-	assert(cstring);
 	return cstring->length;
 }
 
 char
-cstring_at(CString* cstring, int64_t idx) {
+cstring_at(CString* cstring, size_t idx) {
 	assert(cstring);
 	assert(cstring->length >= idx);
-	assert(idx >= 0);
 
 	return cstring->buffer[idx];
 }
 
 void
-cstring_replace(CString* cstring, int64_t idx, char new_char) {
+cstring_replace(CString* cstring, size_t idx, char new_char) {
 	assert(cstring);
 	assert(cstring->length >= idx);
-	assert(idx >= 0);
 
 	cstring->buffer[idx] = new_char;
 }
 
-char const* const
+const char*
 cstring_get_string(CString* cstring) {
 	assert(cstring);
 
