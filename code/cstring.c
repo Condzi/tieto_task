@@ -27,6 +27,11 @@ cstring_new(const char* string) {
 
 void
 cstring_delete(CString* cstring) {
+	if (!cstring) {
+		perror("cstring is NULL");
+		return 0;
+	}
+
 	free(cstring->buffer);
 	free(cstring);
 }

@@ -20,5 +20,5 @@ int main() {
 	puts(cstring_get_string(cstring));
 	puts("If you see this message, all tests have passed :)");
 
-	free(cstring);
+	cstring_delete(cstring);
 }
